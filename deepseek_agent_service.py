@@ -14,6 +14,7 @@ import os
 import json
 import requests
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # 👈 add this import
 from openai import OpenAI
 
 # ==== Config via environment variables ====
@@ -191,6 +192,16 @@ def run_deepseek_agent(country_query: str) -> str:
 
 # ==== Flask service ====
 app = Flask(__name__)
+
+# Allow your React dev origin (5173) to call /report and /health
+CORS(
+    app,
+    resources={
+        r"/report": {"origins": ["http://localhost:5173"]},
+        r"/health": {"origins": ["http://localhost:5173"]},
+    },
+    supports_credentials=False,
+)
 
 @app.route("/report", methods=["GET", "POST"])
 def report():

@@ -1,0 +1,23 @@
+setup.cfg:
+[metadata]
+name = mcp_country_server
+version = 0.1.0
+description = A sample project
+author = Your Name
+author_email = your.email@example.com
+license = MIT
+
+[options]
+packages = find:
+py_modules = deepseek_agent_service, mcp_core, server
+
+[options.packages.find]
+where = .
+
+[tool:pytest]
+testpaths = tests
+python_files = test_*.py
+
+tests/test_hello.py:
+def test_hello():
+    assert True
